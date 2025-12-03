@@ -132,7 +132,7 @@ int printMenu() {
     char buffer[100];
     int choice = -1;
 
-    printf("\n+----------- \x1b[34mQUAN LY NHAN VIEN & CHAM CONG\x1b[0m ------------+\n");
+    printf("\n+----------- \x1b[36mQUAN LY NHAN VIEN & CHAM CONG\x1b[0m ------------+\n");
     printf("|%-54s|\n","1. Them nhan vien moi.");
     printf("|%-54s|\n","2. Cap nhat ho so nhan vien.");
     printf("|%-54s|\n","3. Sa thai nhan vien.");
@@ -292,7 +292,7 @@ void deleteEmployee() {
     char buffer[20];
     
     while (1) {
-        printf("Nhap ma nhan vien can xoa: ");
+        printf("Nhap ID nhan vien can xoa: ");
         fgets(id, sizeof(id), stdin);
         removeNewline(id);
         if (strlen(id) == 0) {
@@ -396,7 +396,7 @@ void searchEmployeeByName() {
 
     char keyword[50];
     while (1) {
-        printf("Nhap ten hoac mot phan cua ten nhan vien (khong dau): ");
+        printf("Nhap ten hoac mot phan cua ten nhan vien: ");
         fgets(keyword, sizeof(keyword), stdin);
         removeNewline(keyword);
 
@@ -419,12 +419,7 @@ void searchEmployeeByName() {
         }
         break;
     }
-   
-    for (int i = 0; keyword[i]; i++) {
-        if (keyword[i] >= 'A' && keyword[i] <= 'Z') {
-            keyword[i] += 32;
-        }
-    }
+    
     printf("+----------+--------------------+--------------------+--------------------+--------------------+\n");
     printf("|%-10s|%-20s|%-20s|%-20s|%-20s|\n", "Ma NV", "Ten NV", "Chuc vu", "Luong co ban", "So ngay cong");
     printf("+----------+--------------------+--------------------+--------------------+--------------------+\n");
@@ -434,15 +429,8 @@ void searchEmployeeByName() {
         char lowerName[50];
         strcpy(lowerName, employees[i].name);
 
-        for (int j = 0; lowerName[j]; j++) {
-            if (lowerName[j] >= 'A' && lowerName[j] <= 'Z') {
-                lowerName[j] += 32;
-            }
-        }
         if (strstr(lowerName, keyword) != NULL) {
-            printf("|%-10s|%-20s|%-20s|%-20.0lf|%-20d|\n",
-                employees[i].empId, employees[i].name, employees[i].position,
-                employees[i].baseSalary, employees[i].workDays);
+            printf("|%-10s|%-20s|%-20s|%-20.0lf|%-20d|\n", employees[i].empId, employees[i].name, employees[i].position, employees[i].baseSalary, employees[i].workDays);
             found++;
         }
     }
@@ -470,7 +458,6 @@ void sortEmployees() {
         printf("1. Tang dan\n");
         printf("2. Giam dan\n");
         printf("Nhap lua chon (1-2): ");
-        
         if (fgets(buffer, sizeof(buffer), stdin) == NULL) continue;
         removeNewline(buffer);
 
